@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: tags_development
+
+test:
+  <<: *default
+  database: tags_test
+
+production:
+  <<: *default
+  database: tags_production
