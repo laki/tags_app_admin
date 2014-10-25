@@ -11,10 +11,25 @@ describe Api::V1::PostsController do
         description: post_params[:description],
         link: post_params[:link]
 
-      expect(response).to be_success
-      expect(response.code).to eq('201')
       json_response = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(response.status).to eq 201
       expect(json_response).to include("post")
+    end
+
+    it "requires title param to be present" do
+      post_params = FactoryGirl.attributes_for(:post)
+      post :create,
+        format: :json,
+        description: post_params[:description],
+        link: post_params[:link]
+
+      json_response = JSON.parse(response.body)
+
+      expect(response.status).to eq 422
+      expect(json_response).to include("errors")
+      expect(json_response["errors"]).to include "Validation failed: Title can't be blank"
     end
   end
 
