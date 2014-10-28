@@ -22,7 +22,8 @@ module Api
         params.permit(
           :title,
           :description,
-          :link
+          :link,
+          :ip_address
         )
       end
     end
