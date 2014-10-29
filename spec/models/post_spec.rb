@@ -13,5 +13,10 @@ describe Post do
     it "is invalid without IP address" do
       expect(FactoryGirl.build(:post, ip_address: nil)).to_not be_valid
     end
+
+    it "has a correct slug" do
+      post = FactoryGirl.create(:post)
+      expect(post.slug).to eq "#{Slug.new(post.title)}"
+    end
   end
 end

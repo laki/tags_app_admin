@@ -7,6 +7,7 @@ module Api
         {
           id: p.id,
           title: p.title,
+          slug: p.slug,
           description: p.description,
           link: p.link
         }
