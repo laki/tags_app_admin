@@ -30,4 +30,28 @@ describe Post do
       expect(post.is_private).to be false
     end
   end
+
+  context "scopes" do
+    let!(:personal) { FactoryGirl.create(:post, :private) }
+    let!(:visible) { FactoryGirl.create(:post) }
+    let!(:deleted) { FactoryGirl.create(:post, :deleted) }
+
+    describe "self#personal" do
+      it "includes personal posts" do
+        expect(Post.personal).to include personal
+      end
+    end
+
+    describe "self#visible" do
+      it "includes publicly visible posts" do
+        expect(Post.visible).to include visible
+      end
+    end
+
+    describe "self#default_scope" do
+      it "dose not include deleted posts" do
+        expect(Post.all).to_not include deleted
+      end
+    end
+  end
 end

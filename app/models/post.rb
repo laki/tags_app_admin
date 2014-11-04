@@ -7,6 +7,10 @@ class Post < ActiveRecord::Base
   #validates :body, length: { title: 250 }
   #validates :body, length: { description: 1000 }
 
+  default_scope { where deleted: false }
+  scope :personal, -> { where is_private: true }
+  scope :visible, -> { where is_private: false }
+
   private
 
   def calculate_slug
