@@ -13,6 +13,10 @@ describe Post do
     it "is invalid without IP address" do
       expect(FactoryGirl.build(:post, ip_address: nil)).to_not be_valid
     end
+
+    it "allows private posts" do
+      expect(FactoryGirl.create(:post, :private)).to be_valid
+    end
   end
 
   context "Default values" do

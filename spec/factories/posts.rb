@@ -6,4 +6,8 @@ FactoryGirl.define do
     ip_address '127.0.0.1'
     is_private false
   end
+
+  trait :private do
+    is_private true
+  end
 end
