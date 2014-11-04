@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029024007) do
+ActiveRecord::Schema.define(version: 20141104025259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 20141029024007) do
     t.datetime "updated_at"
     t.string   "ip_address"
     t.string   "slug"
+    t.boolean  "is_private",         default: false
   end
+
+  add_index "posts", ["is_private"], name: "index_posts_on_is_private", using: :btree
 
 end

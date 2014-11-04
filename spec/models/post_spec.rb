@@ -13,10 +13,17 @@ describe Post do
     it "is invalid without IP address" do
       expect(FactoryGirl.build(:post, ip_address: nil)).to_not be_valid
     end
+  end
+
+  context "Default values" do
+    let(:post) { FactoryGirl.create(:post) }
 
     it "has a correct slug" do
-      post = FactoryGirl.create(:post)
       expect(post.slug).to eq "#{Slug.new(post.title)}"
+    end
+
+    it "has private set to false" do
+      expect(post.is_private).to be false
     end
   end
 end

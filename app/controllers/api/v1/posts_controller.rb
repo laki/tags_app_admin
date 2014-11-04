@@ -23,7 +23,8 @@ module Api
           :title,
           :description,
           :link,
-          :ip_address
+          :ip_address,
+          :is_private
         )
       end
     end

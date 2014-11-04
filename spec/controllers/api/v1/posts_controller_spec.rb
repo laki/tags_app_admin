@@ -32,6 +32,20 @@ describe Api::V1::PostsController do
       expect(json_response["errors"]).to include "Title can't be blank"
       expect(json_response["errors"]).to include "Ip address can't be blank"
     end
+
+    it "creates a private post" do
+      post :create,
+        format: :json,
+        title: post_params[:title],
+        description: post_params[:description],
+        link: post_params[:link],
+        ip_address: post_params[:ip_address],
+        is_private: true
+
+      json_response = JSON.parse(response.body)
+
+      expect(json_response["post"]["is_private"]).to eq true
+    end
   end
 
   context "GET #index" do
