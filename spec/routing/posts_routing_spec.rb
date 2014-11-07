@@ -11,9 +11,9 @@ RSpec.describe "routes for API", :type => :routing do
   end
 
   it "is alive, right?" do
-    expect(:get => "/healthcheck").to route_to(
-      :controller => "healthcheck",
-      :action => "index"
+    expect(get: "/healthcheck").to route_to(
+      controller: "healthcheck",
+      action: "index"
     )
   end
 end
