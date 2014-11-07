@@ -1,13 +1,14 @@
 class Slug
   include Comparable
-  attr_reader :name
+  attr_reader :name, :options
 
-  def initialize(name)
+  def initialize(name, options={})
     @name = name.to_s
+    @options = options
   end
 
   def to_s
-    quoteless.parameterize
+    quoteless.parameterize.downcase
   end
 
   def as_json(*)
@@ -21,6 +22,11 @@ class Slug
   private
 
   def quoteless
-    name.gsub /['"`]/, ''
+    slug = name.gsub(/['"`]/, '')
+
+    if options == :clean
+      slug.gsub!(/[^0-9a-zA-Z]+/, '')
+    end
+    slug
   end
 end
