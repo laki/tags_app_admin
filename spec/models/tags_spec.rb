@@ -9,10 +9,6 @@ describe Tag do
     it "is invalid without a name" do
       expect(FactoryGirl.build(:tag, name: nil)).to_not be_valid
     end
-
-    it "is invalid without a slug" do
-      expect(FactoryGirl.build(:tag, slug: nil)).to_not be_valid
-    end
   end
 
   context "Slugify" do

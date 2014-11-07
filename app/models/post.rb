@@ -1,11 +1,13 @@
 class Post < ActiveRecord::Base
   before_validation :calculate_slug
+
   validates_presence_of :title, :ip_address, :slug
+  validates_length_of :title, maximum: 100
+  validates_length_of :description, maximum: 1000
+
   after_validation :revert_slug
 
   normalize_attributes :title, :description, :url
-  #validates :body, length: { title: 250 }
-  #validates :body, length: { description: 1000 }
 
   default_scope { where deleted: false }
   scope :personal, -> { where is_private: true }

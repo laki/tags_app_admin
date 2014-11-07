@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107164023) do
+ActiveRecord::Schema.define(version: 20141107201014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "posts", force: true do |t|
-    t.string   "title"
+    t.string   "title",              limit: 100,                 null: false
     t.text     "description"
     t.text     "description_source"
     t.text     "link"
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20141107164023) do
     t.datetime "updated_at"
     t.string   "ip_address"
     t.string   "slug"
-    t.boolean  "is_private",         default: false
-    t.boolean  "deleted",            default: false
+    t.boolean  "is_private",                     default: false
+    t.boolean  "deleted",                        default: false
   end
 
   add_index "posts", ["deleted"], name: "index_posts_on_deleted", using: :btree

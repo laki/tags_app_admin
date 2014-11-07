@@ -6,7 +6,6 @@ module Api
       def as_json(*)
         {
           id: p.id,
-          is_private: p.is_private,
           title: p.title,
           slug: p.slug,
           description: p.description,

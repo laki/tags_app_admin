@@ -10,6 +10,14 @@ describe Post do
       expect(FactoryGirl.build(:post, title: nil)).to_not be_valid
     end
 
+    it "is invalid if title is over 100 characters" do
+      expect(FactoryGirl.build(:post, title: "Foo"*40)).to_not be_valid
+    end
+
+    it "is invalid if description is over 1000 characters" do
+      expect(FactoryGirl.build(:post, description: "FooBar"*200)).to_not be_valid
+    end
+
     it "is invalid without IP address" do
       expect(FactoryGirl.build(:post, ip_address: nil)).to_not be_valid
     end
@@ -20,7 +28,7 @@ describe Post do
   end
 
   context "Default values" do
-    let(:post) { FactoryGirl.create(:post) }
+    let(:post) { FactoryGirl.create(:post, title: "Foo Bar", slug: "foo-bar") }
 
     it "has a correct slug" do
       expect(post.slug).to eq "#{Slug.new(post.title)}"
