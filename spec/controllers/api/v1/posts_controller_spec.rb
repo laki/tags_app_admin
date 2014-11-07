@@ -46,7 +46,7 @@ describe Api::V1::PostsController do
 
       expect(response).to be_success
       expect(response.status).to eq 201
-      expect(json_response["post"]["is_private"]).to eq true
+      expect(json_response).to include("post")
     end
   end
 
