@@ -1,6 +1,7 @@
 class Tag < ActiveRecord::Base
   before_validation :calculate_slug
   validates_presence_of :name, :slug
+  validates_uniqueness_of :slug
   after_validation :revert_slug
 
   private

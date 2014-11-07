@@ -9,6 +9,13 @@ describe Tag do
     it "is invalid without a name" do
       expect(FactoryGirl.build(:tag, name: nil)).to_not be_valid
     end
+
+    it "has unique slug" do
+      name = "FooBar"
+      slug = "foobar"
+      expect(FactoryGirl.create(:tag, name: name, slug: slug)).to be_valid
+      expect(FactoryGirl.build(:tag, name: name, slug: slug)).to_not be_valid
+    end
   end
 
   context "Slugify" do
