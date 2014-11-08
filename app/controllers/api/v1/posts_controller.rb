@@ -10,7 +10,7 @@ module Api
       def create
         begin
           post = PostBuilder.new(post_params).save
-          render json: { post: PostDetails.new(post) }, status: 201
+          render json: { posts: PostDetails.new(post) }, status: 201
         rescue => e
           render json: { errors: e.message }, status: :unprocessable_entity
         end

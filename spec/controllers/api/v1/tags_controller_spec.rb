@@ -11,7 +11,20 @@ describe Api::V1::TagsController do
 
       expect(response).to be_success
       expect(response.status).to eq 201
-      expect(json_response).to include("tag")
+      expect(json_response).to include("tags")
+    end
+
+    it "creates multiple tags when passing two word name" do
+      post :create,
+        format: :json,
+        name: "Another World!"
+
+      json_response = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(response.status).to eq 201
+      expect(json_response).to include("tags")
+      expect(json_response["tags"].size).to eq 2
     end
   end
 

@@ -16,7 +16,7 @@ describe Api::V1::PostsController do
 
       expect(response).to be_success
       expect(response.status).to eq 201
-      expect(json_response).to include("post")
+      expect(json_response).to include("posts")
     end
 
     it "validates presence of title, ip_address params" do
@@ -46,7 +46,7 @@ describe Api::V1::PostsController do
 
       expect(response).to be_success
       expect(response.status).to eq 201
-      expect(json_response).to include("post")
+      expect(json_response).to include("posts")
     end
   end
 
