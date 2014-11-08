@@ -4,7 +4,8 @@ module Api
       respond_to :json
 
       def index
-        render json: { tags: Tag.all }
+        tags = Tag.all
+        render json: json_response(Tag.all)
       end
 
       def create
@@ -14,7 +15,7 @@ module Api
             tags << TagBuilder.new(name: tag_name).save
           end
 
-          render json: { tags: tags.map { |tag| TagDetails.new(tag) } }, status: 201
+          render json: json_response(tags), status: 201
         rescue => e
           render json: { errors: e.message }, status: :unprocessable_entity
         end
@@ -28,6 +29,12 @@ module Api
 
       def tag_names
         tag_params[:name].split(' ')
+      end
+
+      def json_response(tags)
+        {
+          tags: tags.map { |tag| TagDetails.new(tag) }
+        }
       end
     end
   end

@@ -4,13 +4,13 @@ module Api
       respond_to :json
 
       def index
-        render json: { posts: Post.all }
+        render json: json_response(Post.all)
       end
 
       def create
         begin
           post = PostBuilder.new(post_params).save
-          render json: { posts: PostDetails.new(post) }, status: 201
+          render json: json_response([post]), status: 201
         rescue => e
           render json: { errors: e.message }, status: :unprocessable_entity
         end
@@ -26,6 +26,12 @@ module Api
           :ip_address,
           :is_private
         )
+      end
+
+      def json_response(posts)
+        {
+          posts: posts.map { |post| PostDetails.new(post) }
+        }
       end
     end
   end
