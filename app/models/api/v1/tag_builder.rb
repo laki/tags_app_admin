@@ -12,7 +12,7 @@ module Api
       def save
         Tag.create! params
       rescue => e
-        raise InvalidPost, e.message
+        raise InvalidTag, e.message
       end
     end
   end
