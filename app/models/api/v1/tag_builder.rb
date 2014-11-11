@@ -12,7 +12,8 @@ module Api
       def save
         tags = []
         tag_names.each do |tag_name|
-          tags << Tag.create!(name: tag_name)
+          tag = Tag.new(name: tag_name)
+          tags << Tag.create_with(name: tag_name).find_or_create_by(slug: tag.slug)
         end
         tags
 
