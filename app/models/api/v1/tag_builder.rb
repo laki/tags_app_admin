@@ -10,9 +10,20 @@ module Api
       end
 
       def save
-        Tag.create! params
+        tags = []
+        tag_names.each do |tag_name|
+          tags << Tag.create!(name: tag_name)
+        end
+        tags
+
       rescue => e
         raise InvalidTag, e.message
+      end
+
+      private
+
+      def tag_names
+        params[:name].split(' ')
       end
     end
   end

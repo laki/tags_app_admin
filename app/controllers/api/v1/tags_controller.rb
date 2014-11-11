@@ -10,11 +10,7 @@ module Api
 
       def create
         begin
-          tags = []
-          tag_names.each do |tag_name|
-            tags << TagBuilder.new(name: tag_name).save
-          end
-
+          tags = TagBuilder.new(tag_params).save
           render json: json_response(tags), status: 201
         rescue => e
           render json: { errors: e.message }, status: :unprocessable_entity
@@ -25,10 +21,6 @@ module Api
 
       def tag_params
         params.permit(:name)
-      end
-
-      def tag_names
-        tag_params[:name].split(' ')
       end
 
       def json_response(tags)
