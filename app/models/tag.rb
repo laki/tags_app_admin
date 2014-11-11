@@ -4,6 +4,9 @@ class Tag < ActiveRecord::Base
   validates_uniqueness_of :slug
   after_validation :revert_slug
 
+  has_many :post_tags
+  has_many :posts, through: :post_tags
+
   private
 
   def calculate_slug

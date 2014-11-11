@@ -9,6 +9,9 @@ class Post < ActiveRecord::Base
 
   normalize_attributes :title, :description, :url
 
+  has_many :post_tags
+  has_many :tags, through: :post_tags
+
   default_scope { where deleted: false }
   scope :personal, -> { where is_private: true }
   scope :visible, -> { where is_private: false }
