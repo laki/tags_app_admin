@@ -25,6 +25,10 @@ describe Post do
     it "allows private posts" do
       expect(FactoryGirl.create(:post, :private)).to be_valid
     end
+
+    it "is invalid with bad url" do
+      expect(FactoryGirl.build(:post, link: "zzz")).to_not be_valid
+    end
   end
 
   context "Default values" do

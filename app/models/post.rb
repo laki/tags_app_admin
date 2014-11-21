@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :title, :ip_address, :slug
   validates_length_of :title, maximum: 100
   validates_length_of :description, maximum: 1000
+  validates_format_of :link, with: URI::regexp(%w(http https))
 
   after_validation :revert_slug
 
