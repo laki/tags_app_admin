@@ -19,7 +19,7 @@ module Api
 
       private
       def tag_params
-        params.permit(:name)
+        params.permit(:tag_list)
       end
 
       def json_response(tags)

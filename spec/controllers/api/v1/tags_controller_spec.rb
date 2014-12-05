@@ -5,7 +5,7 @@ describe Api::V1::TagsController do
     it "creates a tag" do
       post :create,
         format: :json,
-        name: "Another~World"
+        tag_list: "Another~World"
 
       json_response = JSON.parse(response.body)
 
@@ -17,7 +17,7 @@ describe Api::V1::TagsController do
     it "creates multiple tags when passing two word name" do
       post :create,
         format: :json,
-        name: "Another World!"
+        tag_list: "Another World!"
 
       json_response = JSON.parse(response.body)
 

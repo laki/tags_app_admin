@@ -48,6 +48,23 @@ describe Api::V1::PostsController do
       expect(response.status).to eq 201
       expect(json_response).to include("posts")
     end
+
+    it "creates a post with tags" do
+      post :create,
+        format: :json,
+        title: post_params[:title],
+        description: post_params[:description],
+        link: post_params[:link],
+        ip_address: post_params[:ip_address],
+        tag_list: "foo bar"
+
+      json_response = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(response.status).to eq 201
+      expect(json_response).to include("posts")
+      # TODO include [tags]
+    end
   end
 
   context "GET #index" do

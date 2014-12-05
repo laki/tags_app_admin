@@ -3,10 +3,10 @@ module Api
     InvalidTag = Class.new StandardError
 
     class TagBuilder
-      attr_reader :params
+      attr_reader :tag_list
 
       def initialize(params)
-        @params = params
+        @tag_list = params[:tag_list]
       end
 
       def save
@@ -23,7 +23,7 @@ module Api
 
       private
       def tag_names
-        params[:name].split(' ')
+        tag_list.split(' ')
       end
     end
   end
