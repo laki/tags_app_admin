@@ -22,7 +22,6 @@ module Api
       end
 
       private
-
       def tag_names
         params[:name].split(' ')
       end

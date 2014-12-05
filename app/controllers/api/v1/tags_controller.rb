@@ -18,7 +18,6 @@ module Api
       end
 
       private
-
       def tag_params
         params.permit(:name)
       end

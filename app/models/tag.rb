@@ -1,14 +1,14 @@
 class Tag < ActiveRecord::Base
-  after_initialize :calculate_slug
-  validates_presence_of :name, :slug
-  validates_uniqueness_of :slug
-  after_validation :revert_slug
-
   has_many :post_tags
   has_many :posts, through: :post_tags
 
-  private
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :slug, presence: true, length: { maximum: 50 }, uniqueness: true
 
+  after_initialize :calculate_slug
+  after_validation :revert_slug
+
+  private
   def calculate_slug
     self.slug ||= Slug.new(name, :clean).to_s
   end

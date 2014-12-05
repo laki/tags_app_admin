@@ -1,24 +1,23 @@
 class Post < ActiveRecord::Base
-  before_validation :calculate_slug
-
-  validates_presence_of :title, :ip_address, :slug
-  validates_length_of :title, maximum: 100
-  validates_length_of :description, maximum: 1000
-  validates_format_of :link, with: URI::regexp(%w(http https))
-
-  after_validation :revert_slug
-
-  normalize_attributes :title, :description, :url
-
-  has_many :post_tags
-  has_many :tags, through: :post_tags
-
   default_scope { where deleted: false }
   scope :personal, -> { where is_private: true }
   scope :visible, -> { where is_private: false }
 
-  private
+  has_many :post_tags
+  has_many :tags, through: :post_tags
 
+  validates :title, presence: true, length: { maximum: 100 }
+  validates :ip_address, presence: true
+  validates :slug, presence: true
+  validates :description, length: { maximum: 1000 }
+  validates :link, format: { with: URI::regexp(%w(http https)) }
+
+  before_validation :calculate_slug
+  after_validation :revert_slug
+
+  normalize_attributes :title, :description, :url
+
+  private
   def calculate_slug
     self.slug ||= Slug.new(title).to_s
   end

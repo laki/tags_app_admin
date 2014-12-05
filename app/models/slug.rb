@@ -20,7 +20,6 @@ class Slug
   end
 
   private
-
   def quoteless
     slug = name.gsub(/['"`]/, '')
 
