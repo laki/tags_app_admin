@@ -9,9 +9,7 @@ module Api
 
       def create
         begin
-          post = PostBuilder.new(post_params).save
-          # tags = TagBuilder.new(tag_params).save
-          # TODO save post tags
+          post = PostBuilder.new(post_params).save!
           render json: json_response([post]), status: 201
         rescue => e
           render json: { errors: e.message }, status: :unprocessable_entity
@@ -25,12 +23,7 @@ module Api
           :description,
           :link,
           :ip_address,
-          :is_private
-        )
-      end
-
-      def tag_params
-        params.permit(
+          :is_private,
           :tag_list
         )
       end
