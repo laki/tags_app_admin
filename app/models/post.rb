@@ -3,8 +3,8 @@ class Post < ActiveRecord::Base
   scope :personal, -> { where is_private: true }
   scope :visible, -> { where is_private: false }
 
-  has_many :post_tags
-  has_many :tags, through: :post_tags
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :ip_address, presence: true

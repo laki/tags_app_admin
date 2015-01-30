@@ -11,31 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111035504) do
+ActiveRecord::Schema.define(version: 20150130202902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "post_tags", force: true do |t|
-    t.integer  "post_id"
-    t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "post_tags", ["post_id", "tag_id"], name: "index_post_tags_on_post_id_and_tag_id", unique: true, using: :btree
-  add_index "post_tags", ["post_id"], name: "index_post_tags_on_post_id", using: :btree
-  add_index "post_tags", ["tag_id"], name: "index_post_tags_on_tag_id", using: :btree
-
-  create_table "posts", force: true do |t|
+  create_table "posts", force: :cascade do |t|
     t.string   "title",              limit: 100,                 null: false
     t.text     "description"
     t.text     "description_source"
     t.text     "link"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ip_address"
-    t.string   "slug"
+    t.string   "ip_address",         limit: 255
+    t.string   "slug",               limit: 255
     t.boolean  "is_private",                     default: false
     t.boolean  "deleted",                        default: false
   end
@@ -43,7 +32,18 @@ ActiveRecord::Schema.define(version: 20141111035504) do
   add_index "posts", ["deleted"], name: "index_posts_on_deleted", using: :btree
   add_index "posts", ["is_private"], name: "index_posts_on_is_private", using: :btree
 
-  create_table "tags", force: true do |t|
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["post_id", "tag_id"], name: "index_taggings_on_post_id_and_tag_id", unique: true, using: :btree
+  add_index "taggings", ["post_id"], name: "index_taggings_on_post_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
     t.string   "name",       limit: 50, null: false
     t.string   "slug",       limit: 50, null: false
     t.datetime "created_at"

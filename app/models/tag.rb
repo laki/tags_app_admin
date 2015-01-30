@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
-  has_many :post_tags
-  has_many :posts, through: :post_tags
+  has_many :taggings
+  has_many :posts, through: :taggings
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :slug, presence: true, length: { maximum: 50 }, uniqueness: true

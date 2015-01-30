@@ -11,7 +11,7 @@ module Api
         begin
           post = PostBuilder.new(post_params).save
           # tags = TagBuilder.new(tag_params).save
-          # TODO save post tags, rename post_tags to taggings
+          # TODO save post tags
           render json: json_response([post]), status: 201
         rescue => e
           render json: { errors: e.message }, status: :unprocessable_entity
