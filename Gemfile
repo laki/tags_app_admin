@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.2.0'
 
-gem 'rails', '4.1.6'
+gem 'rails', '4.2.0'
 
 gem 'attribute_normalizer'
 gem 'coffee-rails'
@@ -28,6 +28,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'pry'
   gem 'pry-nav'
+  gem 'responders'
   gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'sdoc', '~> 0.4.0', group: :doc
