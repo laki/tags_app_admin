@@ -23,7 +23,7 @@ module Api
 
       private
       def tag_names
-        tag_list.split(' ')
+        tag_list.try(:split, (' ')) || []
       end
     end
   end
