@@ -5,6 +5,8 @@ module Api
 
       def as_json(*)
         {
+          id: t.id,
+          name: t.name,
           slug: t.slug
         }
       end
