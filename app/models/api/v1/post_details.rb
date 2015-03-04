@@ -9,8 +9,14 @@ module Api
           title: p.title,
           slug: p.slug,
           description: p.description,
-          link: p.link
+          link: p.link,
+          tags: tags(p.tags)
         }
+      end
+
+      private
+      def tags(t)
+        t.map { |tag| TagDetails.new(tag) }
       end
     end
   end
