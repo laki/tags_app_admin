@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
-  default_scope { where deleted: false }
-  scope :personal, -> { where is_private: true }
-  scope :visible, -> { where is_private: false }
+  default_scope { where(deleted: false).includes(:tags) }
+  scope :personal, -> { where(is_private: true) }
+  scope :visible, -> { where(is_private: false) }
 
   has_many :taggings
   has_many :tags, through: :taggings
