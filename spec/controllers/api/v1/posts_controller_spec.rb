@@ -63,7 +63,7 @@ describe Api::V1::PostsController do
       expect(response).to be_success
       expect(response.status).to eq 201
       expect(json_response).to include("posts")
-      # TODO include [tags]
+      expect(json_response["posts"][0]).to include("tags")
     end
   end
 
