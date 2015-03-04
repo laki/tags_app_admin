@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   validates :ip_address, presence: true
   validates :slug, presence: true
   validates :description, length: { maximum: 1000 }
-  validates :link, format: { with: URI::regexp(%w(http https)) }
+  validates :link, allow_blank: true, format: { with: URI::regexp(%w(http https)) }
 
   before_validation :calculate_slug
   after_validation :revert_slug
